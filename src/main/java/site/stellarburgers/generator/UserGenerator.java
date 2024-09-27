@@ -3,21 +3,22 @@ package site.stellarburgers.generator;
 import site.stellarburgers.pojo.LoginUser;
 import site.stellarburgers.pojo.RegisterUser;
 
+import java.util.Random;
+
 public class UserGenerator {
 
     final static String DEFAULT_EMAIL = "stdr8@test.ru";
     final static String DEFAULT_PASSWORD = "123";
     final static String DEFAULT_NAME = "Seva";
     final static String FAKE_EMAIL = "dfjzgzn4564dnbxfgb@ffg435gb.r7u6tr";
-    final static String NEW_EMAIL = "jfdjxivnjdf"+DEFAULT_EMAIL;
-    final static String NEW_PASSWORD = "12345";
-    final static String NEW_NAME = "aveS";
 
     public enum UserField {
         EMAIL,
         PASSWORD,
         NAME
     }
+
+    private static final Random RANDOM = new Random();
 
     public static RegisterUser getDefaultRegistrationData() {
         return new RegisterUser(DEFAULT_EMAIL, DEFAULT_PASSWORD, DEFAULT_NAME);
@@ -44,7 +45,7 @@ public class UserGenerator {
     }
 
     public static LoginUser getNewLoginData() {
-        return new LoginUser(NEW_EMAIL, DEFAULT_PASSWORD);
+        return new LoginUser(generateRandomEmail(), DEFAULT_PASSWORD);
     }
 
     public static LoginUser getFakeLoginData() {
@@ -52,7 +53,18 @@ public class UserGenerator {
     }
 
     public static RegisterUser getDefaultUpdateData() {
-        return new RegisterUser(NEW_EMAIL, NEW_PASSWORD, NEW_NAME);
+        return new RegisterUser(generateRandomEmail(), generateRandomPassword(), generateRandomName());
+    }
+
+    private static String generateRandomEmail() {
+        return "user" + RANDOM.nextInt(100000) + "@test.ru";
+    }
+
+    private static String generateRandomPassword() {
+        return "password" + RANDOM.nextInt(100000);
+    }
+
+    private static String generateRandomName() {
+        return "User" + RANDOM.nextInt(100000);
     }
 }
-

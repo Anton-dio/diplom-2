@@ -11,4 +11,7 @@ public class CreateOrder {
     public CreateOrder(List<String> ingredients) {
         this.ingredients = ingredients;
     }
+
+    public void createOrder(CreateOrder order) {
+    }
 }

@@ -10,7 +10,7 @@ public class OrderGenerator {
     final static String DEFAULT_INGREDIENT_HASH = "61c0c5a71d1f82001bdaaa70";
     final static String INCORRECT_INGREDIENT_HASH = "abc";
 
-    private OrderClient orderClient;
+    private static OrderClient orderClient;
 
     public OrderGenerator(OrderClient orderClient) {
         this.orderClient = orderClient;
@@ -24,7 +24,7 @@ public class OrderGenerator {
 
     public static CreateOrder getOrderWithoutIngredients() {
         CreateOrder order = new CreateOrder(List.of());
-        orderClient.createOrder(order);
+        order.createOrder(order);
         return order;
     }
 

@@ -4,7 +4,10 @@ import lombok.Data;
 
 @Data
 public class RegisterUser {
-    private final String email;
-    private final String password;
-    private final String name;
+    private  String email;
+    private  String password;
+    private  String name;
+
+    public RegisterUser(String defaultEmail, String defaultPassword, String s) {
+    }
 }

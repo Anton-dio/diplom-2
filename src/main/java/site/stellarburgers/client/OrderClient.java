@@ -34,4 +34,6 @@ public class OrderClient extends  Client{
                 .then();
     }
 
+    public static void createOrder(CreateOrder order) {
+    }
 }

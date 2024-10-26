@@ -1,7 +1,7 @@
 package site.stellarburgers.generator;
 
-import site.stellarburgers.pojo.LoginUser;
 import site.stellarburgers.pojo.RegisterUser;
+import site.stellarburgers.pojo.LoginUser;
 
 import java.util.Random;
 

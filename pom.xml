@@ -8,6 +8,17 @@
     <artifactId>QA-java-diplom-2</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <!-- версии -->
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <aspectj.version>1.9.7</aspectj.version>
+        <allure.version>2.19.0</allure.version>
+        <!-- кодировки -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -24,6 +35,16 @@
             <artifactId>rest-assured</artifactId>
             <version>5.3.0</version>
         </dependency>
+        <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.30</version>
+    </dependency>
+    <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>1.2.3</version>
+    </dependency>
         <!-- модуль взаимодействия Allure и Junit -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
@@ -50,17 +71,6 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
-    <properties>
-        <!-- версии -->
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <aspectj.version>1.9.7</aspectj.version>
-        <allure.version>2.19.0</allure.version>
-        <!-- кодировки -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    </properties>
 
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
@@ -117,7 +127,4 @@
             </plugin>
         </plugins>
     </build>
-
-
-
 </project>

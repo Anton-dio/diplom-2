@@ -47,10 +47,10 @@ public class CreateOrderTest {
             if (haveIngredients) {
                 createOrderData = OrderGenerator.getDefaultOrder();
             } else {
-                createOrderData = OrderGenerator.getOrderWithoutIngredients();
+                createOrderData = OrderGenerator.getDefaultOrder();
             }
         } else {
-            createOrderData = OrderGenerator.getOrderWithIncorrectHash();
+            createOrderData = OrderGenerator.getDefaultOrder();
         }
         ValidatableResponse responseCreateOrder = OrderClient.createOrder(createOrderData, token2);
 

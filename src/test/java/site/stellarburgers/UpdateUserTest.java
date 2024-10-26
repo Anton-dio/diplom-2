@@ -21,21 +21,30 @@ import static org.apache.http.HttpStatus.*;
 public class UpdateUserTest {
 
     private final RegisterUser registerData = UserGenerator.getDefaultRegistrationData();
-
     private final RegisterUser updateData = UserGenerator.getDefaultUpdateData();
     private String token = "";
     private int statusCode;
     private boolean isUpdated;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         ValidatableResponse responseRegister = UserClient.registerUser(registerData);
-        token = responseRegister.extract().path("accessToken");
+        int registerStatusCode = responseRegister.extract().statusCode();
+        if (registerStatusCode == SC_OK) {
+            token = responseRegister.extract().path("accessToken");
+            Assert.assertNotNull("Token is null", token);
+        } else {
+            throw new AssertionError("Registration failed with status code: " + registerStatusCode);
+        }
     }
 
     @After
-    public void tearDown(){
-        ValidatableResponse responseDelete = UserClient.deleteUser(token);
+    public void tearDown() {
+        if (token != null) {
+            ValidatableResponse responseDelete = UserClient.deleteUser(token);
+            int deleteStatusCode = responseDelete.extract().statusCode();
+            Assert.assertEquals("Failed to delete user", SC_OK, deleteStatusCode);
+        }
     }
 
     @Test
@@ -43,15 +52,18 @@ public class UpdateUserTest {
     @TestCaseName("Изменение данных пользователя с авторизацией: {0}")
     public void updateUserWithAuthorization(boolean isAuth, int status) {
         String token2 = "abc";
-        if (isAuth) {token2 = token;}
+        if (isAuth) {
+            token2 = token;
+        }
         ValidatableResponse responseUpdate = UserClient.updateUser(updateData, token2);
 
         statusCode = responseUpdate.extract().statusCode();
         isUpdated = responseUpdate.extract().path("success");
 
-        Assert.assertEquals("Ошибка в коде или теле ответа", List.of(status, isAuth),
-                List.of(statusCode, isUpdated));
+        Assert.assertEquals("Ошибка в коде ответа", status, statusCode);
+        Assert.assertEquals("Ошибка в теле ответа", isAuth, isUpdated);
     }
+
     private Object[][] updateUserWithAuthorizationParameters() {
         return new Object[][]{
                 {true, SC_OK},

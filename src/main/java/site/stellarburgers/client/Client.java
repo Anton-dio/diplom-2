@@ -16,6 +16,9 @@ public class Client {
     }
 
     protected static RequestSpecification getSpec(String bearerPlusToken) {
+        if (bearerPlusToken == null) {
+            throw new IllegalArgumentException("bearerPlusToken cannot be null");
+        }
         return new RequestSpecBuilder()
                 .setContentType(ContentType.JSON)
                 .addHeader("authorization", bearerPlusToken)
@@ -23,3 +26,4 @@ public class Client {
                 .build();
     }
 }
+
